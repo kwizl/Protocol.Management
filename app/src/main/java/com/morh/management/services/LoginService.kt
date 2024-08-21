@@ -1,0 +1,34 @@
+package com.morh.management.services
+
+import android.os.Build
+import android.service.controls.ControlsProviderService.TAG
+import android.util.Log
+import androidx.annotation.RequiresApi
+import com.morh.management.ApiClient
+import com.morh.management.models.BearerToken
+import com.morh.management.models.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class LoginService {
+    public fun getToken(user: User) {
+        val call = ApiClient.apiService.getToken(user)
+
+        call.enqueue(object : Callback<BearerToken> {
+            @RequiresApi(Build.VERSION_CODES.R)
+            override fun onResponse(call: Call<BearerToken>, response: Response<BearerToken>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.i(TAG, "Response: ${it.Token}")
+                    }
+                }
+            }
+
+            @RequiresApi(Build.VERSION_CODES.R)
+            override fun onFailure(call: Call<BearerToken>, t: Throwable) {
+                Log.i(TAG, "Failure: ${t.message}")
+            }
+        })
+    }
+}

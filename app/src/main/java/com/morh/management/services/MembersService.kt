@@ -6,29 +6,35 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.morh.management.ApiClient
 import com.morh.management.models.Member
+import com.morh.management.models.Visitor
+import com.morh.management.wrappers.PagedResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MemberService {
-    public fun GetMembers()
+class MembersService {
+    public fun GetMembers(): List<Member>?
     {
         val call = ApiClient.apiService.getMembers()
+        var members: List<Member>? = null
 
-        call.enqueue(object : Callback<List<Member>> {
+        call.enqueue(object : Callback<PagedResponse<Member>> {
             @RequiresApi(Build.VERSION_CODES.R)
-            override fun onResponse(call: Call<List<Member>>, response: Response<List<Member>>) {
+            override fun onResponse(call: Call<PagedResponse<Member>>, response: Response<PagedResponse<Member>>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        Log.i(TAG, "Response: ${it}")
+                        Log.i(TAG, "Response: Success")
+                        members = it.Data
                     }
                 }
             }
 
             @RequiresApi(Build.VERSION_CODES.R)
-            override fun onFailure(call: Call<List<Member>>, t: Throwable) {
+            override fun onFailure(call: Call<PagedResponse<Member>>, t: Throwable) {
                 Log.i(TAG, "Failure: ${t.message}")
             }
         })
+
+        return members
     }
 }

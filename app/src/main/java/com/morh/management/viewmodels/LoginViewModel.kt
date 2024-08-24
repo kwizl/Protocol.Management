@@ -9,7 +9,7 @@ import com.morh.management.models.User
 import com.morh.management.services.LoginService
 
 class LoginViewModel : ViewModel() {
-    val _loginService = LoginService();
+    private val _loginService = LoginService();
 
     fun loginUser(username: String, password: String): Boolean
     {

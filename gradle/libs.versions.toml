@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+datastorePreferencesVersion = "1.0.0"
 gsonVersion = "2.11.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -11,9 +12,15 @@ activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 retrofit = "2.11.0"
 protoliteWellKnownTypes = "18.0.0"
+appcompat = "1.6.1"
+material = "1.10.0"
+annotation = "1.6.0"
+constraintlayout = "2.1.4"
+lifecycleLivedataKtx = "2.8.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesVersion" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gsonVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -31,6 +38,11 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", name = "retrofit2", version.ref="retrofit" }
 protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -12,14 +12,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginService {
-    public fun getToken(user: User) {
+    public fun getToken(user: User): String? {
         val call = ApiClient.apiService.getToken(user)
-
+        var token: String? = null
         call.enqueue(object : Callback<BearerToken> {
             @RequiresApi(Build.VERSION_CODES.R)
             override fun onResponse(call: Call<BearerToken>, response: Response<BearerToken>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
+                        token = it.Token
                         Log.i(TAG, "Response: ${it.Token}")
                     }
                 }
@@ -30,5 +31,7 @@ class LoginService {
                 Log.i(TAG, "Failure: ${t.message}")
             }
         })
+
+        return token
     }
 }

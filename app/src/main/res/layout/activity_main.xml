@@ -28,7 +28,7 @@
         tools:ignore="Autofill" />
 
     <Button
-        android:id="@+id/Login"
+        android:id="@+id/LoginButton"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:textSize="26sp"

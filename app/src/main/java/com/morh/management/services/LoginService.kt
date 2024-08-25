@@ -1,5 +1,6 @@
 package com.morh.management.services
 
+import android.content.Context
 import android.os.Build
 import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
@@ -12,6 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginService {
+
+    // Calls API For Authenticating. Returns a Bearer Token when successful
     public fun getToken(user: User): String? {
         val call = ApiClient.apiService.getToken(user)
         var token: String? = null
@@ -22,7 +25,7 @@ class LoginService {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         token = it.Token
-                        Log.i(TAG, "Response: ${it.Token}")
+                        Log.i(TAG, "Response: Success")
                     }
                 }
             }
@@ -32,6 +35,10 @@ class LoginService {
                 Log.i(TAG, "Failure: ${t.message}")
             }
         })
+
+        if (token != null) {
+
+        }
 
         return token
     }

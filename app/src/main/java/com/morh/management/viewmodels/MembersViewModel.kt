@@ -8,9 +8,12 @@ class MembersViewModel : ViewModel() {
 
     private val _membersService = MembersService();
 
+    // Get All Members
     fun getMembers(): List<Member>?
     {
-        val members = _membersService.GetMembers()
+        val token: String = ""
+
+        val members = _membersService.GetMembers(token)
         return members
     }
 }

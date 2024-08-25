@@ -8,9 +8,12 @@ class VisitorsViewModel: ViewModel() {
 
     private val _visitorsService = VisitorsService();
 
+    // Gets All Visitors
     fun getVisitors(): List<Visitor>?
     {
-        val visitors = _visitorsService.GetVisitors()
+        val token: String = ""
+
+        val visitors = _visitorsService.GetVisitors(token)
         return visitors
     }
 }

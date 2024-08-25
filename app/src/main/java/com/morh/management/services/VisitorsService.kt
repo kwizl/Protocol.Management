@@ -13,9 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class VisitorsService {
-    public fun GetVisitors(): List<Visitor>?
+    public fun GetVisitors(token: String): List<Visitor>?
     {
-        val call = ApiClient.apiService.getVisitors()
+        val call = ApiClient.apiService.getVisitors(token)
         var visitors: List<Visitor>? = null
 
         call.enqueue(object : Callback<PagedResponse<Visitor>> {

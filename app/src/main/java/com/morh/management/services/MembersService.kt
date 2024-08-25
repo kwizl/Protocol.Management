@@ -13,9 +13,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MembersService {
-    public fun GetMembers(): List<Member>?
+
+    // Call the List endpoint of the API
+    public fun GetMembers(token: String): List<Member>?
     {
-        val call = ApiClient.apiService.getMembers()
+
+        val call = ApiClient.apiService.getMembers(token)
         var members: List<Member>? = null
 
         call.enqueue(object : Callback<PagedResponse<Member>> {

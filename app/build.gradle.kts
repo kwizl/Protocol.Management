@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.morh.protocolmangement"
+    namespace = "com.morh.protocolmanagement"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.morh.protocolmangement"
+        applicationId = "com.morh.protocolmanagement"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -64,18 +64,22 @@ dependencies {
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.gson)
     implementation(libs.androidx.datastore.preferences)
-    implementation(libs.kotlin.coroutines.core)
-    implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx.v2)
     implementation(libs.androidx.lifecycle.runtime.ktx.v2)
     implementation(libs.androidx.lifecycle.livedata.ktx.v2)
     implementation(libs.lottie)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
+    implementation(libs.androidx.navigation.dynamic.features.fragment)
+    androidTestImplementation(libs.androidx.navigation.testing)
     implementation(libs.protolite.well.known.types)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

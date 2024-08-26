@@ -1,7 +1,7 @@
 package com.morh.management.models
 
 data class User(
-    val Username: String?,
+    val UserName: String?,
     val Password: String?
 
 )

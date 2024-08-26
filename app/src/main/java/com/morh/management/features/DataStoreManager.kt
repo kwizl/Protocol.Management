@@ -16,7 +16,7 @@ class DataStoreManager(context: Context) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     private val store = context.dataStore
 
-    suspend fun StoreTokenLocally(token: String) {
+    suspend fun SetTokenLocally(token: String) {
         val access_token = stringPreferencesKey("access_token")
         store.edit { settings ->
             settings[access_token] = token

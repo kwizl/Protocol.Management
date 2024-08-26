@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Protocol Mangement"
+rootProject.name = "Protocol Management"
 include(":app")

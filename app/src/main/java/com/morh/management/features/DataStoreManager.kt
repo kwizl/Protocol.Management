@@ -35,4 +35,12 @@ class DataStoreManager(context: Context) {
         Log.i(TAG, "Token: ${valueFlow.toString()}")
         return valueFlow.toString()
     }
+
+    suspend fun RemoveTokenLocally(key: String)
+    {
+        val keyStore = stringPreferencesKey(key)
+        store.edit { settings ->
+            settings[keyStore] = ""
+        }
+    }
 }

@@ -32,12 +32,6 @@ class VisitorsActivity : ComponentActivity() {
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
 
-        var visitors : List<Visitor>? = null
-        val job = CoroutineScope(Dispatchers.Default).launch {
-            visitors = _visitorsViewModel.getVisitors()
-        }
-        runBlocking {
-            job.join()
-        }
+        var visitors = _visitorsViewModel.AllVisitors()
     }
 }

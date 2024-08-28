@@ -1,5 +1,6 @@
-package com.morh.management
+package com.morh.management.features
 
+import com.morh.management.interfaces.ApiInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -51,7 +53,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,10 +69,21 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx.v2)
     implementation(libs.androidx.lifecycle.livedata.ktx.v2)
     implementation(libs.lottie)
+    implementation(libs.kotlinx.serialization.json)
+    kapt(libs.androidx.room.compiler.v250)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava2)
+    implementation(libs.androidx.room.rxjava3)
+    implementation(libs.androidx.room.guava)
+    testImplementation(libs.androidx.room.testing)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
+    implementation(libs.filament.android)
     androidTestImplementation(libs.androidx.navigation.testing)
     implementation(libs.protolite.well.known.types)
     implementation(libs.androidx.appcompat)

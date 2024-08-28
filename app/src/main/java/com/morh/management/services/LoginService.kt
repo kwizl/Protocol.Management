@@ -1,15 +1,9 @@
 package com.morh.management.services
 
-import android.os.Build
 import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.morh.management.ApiClient
-import com.morh.management.models.UserDTO
+import com.morh.management.features.ApiClient
 import com.morh.management.models.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginService {
 

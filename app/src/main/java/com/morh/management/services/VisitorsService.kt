@@ -1,39 +1,31 @@
 package com.morh.management.services
 
-import android.os.Build
 import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.morh.management.ApiClient
+import com.google.gson.Gson
+import com.morh.management.features.ApiClient
 import com.morh.management.models.Member
 import com.morh.management.models.Visitor
 import com.morh.management.wrappers.PagedResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class VisitorsService {
-    public fun GetVisitors(token: String): List<Visitor>?
-    {
-        val call = ApiClient.apiService.getVisitors(token)
+    public fun GetVisitors(token: String): List<Visitor>? {
+        val value = "Bearer ${token}"
+        val call = ApiClient.apiService.getVisitors(value)
         var visitors: List<Visitor>? = null
 
-        call.enqueue(object : Callback<PagedResponse<Visitor>> {
-            @RequiresApi(Build.VERSION_CODES.R)
-            override fun onResponse(call: Call<PagedResponse<Visitor>>, response: Response<PagedResponse<Visitor>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        Log.i(TAG, "Response: Success")
-                        visitors = it.Data
-                    }
-                }
+        try
+        {
+            val response = call.execute();
+            val res = response.body();
+            if (res != null) {
+                visitors = res.Data.values as List<Visitor>?
             }
-
-            @RequiresApi(Build.VERSION_CODES.R)
-            override fun onFailure(call: Call<PagedResponse<Visitor>>, t: Throwable) {
-                Log.i(TAG, "Failure: ${t.message}")
-            }
-        })
+        }
+        catch (ex: Exception)
+        {
+            Log.i(TAG, "Failure: ${ex.message}")
+        }
 
         return visitors
     }

@@ -11,4 +11,8 @@
     <style name="Theme.ProtocolManagement.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ProtocolManagement.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.ProtocolManagement.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimationDuration">3</item>
+    </style>
 </resources>

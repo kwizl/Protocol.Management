@@ -2,28 +2,37 @@ package com.morh.management.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import com.morh.management.features.DataStoreManager
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import com.morh.management.features.LocalDatabase
+import com.morh.management.repository.TokenRepository
 import com.morh.management.services.MembersService
 import com.morh.management.services.VisitorsService
+import com.morh.management.tables.Token
+import kotlinx.coroutines.Dispatchers
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
+    private var token: String?
     private val _membersService = MembersService()
     private val _visitorsService = VisitorsService()
-    private val dataStore = DataStoreManager(application)
+    private var repository: TokenRepository
+
+    init {
+        val dao = LocalDatabase.getInstance(application).getTokenDao()
+        repository = TokenRepository(dao)
+        token = repository.getToken().last().TokenVal
+    }
 
     // Returns number of Members
     suspend fun membersCount(): Int? {
-        val token = dataStore.GetTokenLocally("access_token")
-        val count = _membersService.GetMembers(token)
+        val count = token?.let { _membersService.GetMembers(it) }
 
         return count?.count()
     }
 
     // Returns number of Visitors
     suspend fun visitorsCount(): Int? {
-        val token = dataStore.GetTokenLocally("access_token")
-        val count = _visitorsService.GetVisitors(token)
+        val count = token?.let { _visitorsService.GetVisitors(it) }
 
         return count?.count()
     }

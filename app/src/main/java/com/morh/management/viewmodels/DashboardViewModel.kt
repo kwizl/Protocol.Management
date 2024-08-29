@@ -9,12 +9,14 @@ import com.morh.management.repository.TokenRepository
 import com.morh.management.services.MembersService
 import com.morh.management.services.VisitorsService
 import com.morh.management.tables.Token
+import com.morh.management.wrappers.PaginationRequest
 import kotlinx.coroutines.Dispatchers
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
     private var token: String?
     private val _membersService = MembersService()
     private val _visitorsService = VisitorsService()
+    private val _request = PaginationRequest()
     private var repository: TokenRepository
 
     init {
@@ -25,14 +27,14 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
 
     // Returns number of Members
     suspend fun membersCount(): Int? {
-        val count = token?.let { _membersService.GetMembers(it) }
+        val count = token?.let { _membersService.GetMembers(it, _request) }
 
         return count?.count()
     }
 
     // Returns number of Visitors
     suspend fun visitorsCount(): Int? {
-        val count = token?.let { _visitorsService.GetVisitors(it) }
+        val count = token?.let { _visitorsService.GetVisitors(it, _request) }
 
         return count?.count()
     }

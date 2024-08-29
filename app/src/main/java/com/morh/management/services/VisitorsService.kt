@@ -7,11 +7,12 @@ import com.morh.management.features.ApiClient
 import com.morh.management.models.Member
 import com.morh.management.models.Visitor
 import com.morh.management.wrappers.PagedResponse
+import com.morh.management.wrappers.PaginationRequest
 
 class VisitorsService {
-    public fun GetVisitors(token: String): List<Visitor>? {
+    public fun GetVisitors(token: String, request: PaginationRequest): List<Visitor>? {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getVisitors(value)
+        val call = ApiClient.apiService.getVisitors(value, request)
         var visitors: List<Visitor>? = null
 
         try
@@ -19,7 +20,7 @@ class VisitorsService {
             val response = call.execute();
             val res = response.body();
             if (res != null) {
-                visitors = res.Data.values as List<Visitor>?
+                visitors = res
             }
         }
         catch (ex: Exception)

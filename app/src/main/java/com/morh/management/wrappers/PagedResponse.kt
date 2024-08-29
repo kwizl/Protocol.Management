@@ -6,8 +6,6 @@ import java.lang.reflect.Array
 
 @Serializable
 data class PagedResponse<T> (
-    @SerialName("\$id")
-    val id: String,
 
     @SerialName("PagedNumber")
     val PagedNumber: Int,
@@ -34,7 +32,7 @@ data class PagedResponse<T> (
     val PreviousPage: String? = null,
 
     @SerialName("Data")
-    val Data: Data<T>,
+    val Data: List<T>?,
 
     @SerialName("Succeeded")
     val Succeeded: Boolean,
@@ -47,13 +45,4 @@ data class PagedResponse<T> (
 
     @SerialName("Code")
     val Code: String? = null
-)
-
-@Serializable
-data class Data<T> (
-    @SerialName("'$'id")
-    val id: String,
-
-    @SerialName("\$values")
-    val values: List<T>?
 )

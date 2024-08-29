@@ -8,30 +8,32 @@ import com.google.gson.JsonDeserializer
 import com.morh.management.features.ApiClient
 import com.morh.management.models.Member
 import com.morh.management.wrappers.PagedResponse
+import com.morh.management.wrappers.PaginationRequest
 
 
 class MembersService {
 
     // Call the List endpoint of the API
-    public fun GetMembers(token: String): List<Member>?
+    public fun GetMembers(token: String, request: PaginationRequest): List<Member>?
     {
-        val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getMembers(value)
-        var members: List<Member>? = null
-
         try
         {
+            val value = "Bearer ${token}"
+            val call = ApiClient.apiService.getMembers(value, request)
+            var members: List<Member>? = null
+
             val response = call.execute();
             val res = response.body();
             if (res != null) {
-                members = res.Data.values as List<Member>?
+                members = res
             }
+
+            return members
         }
         catch (ex: Exception)
         {
             Log.i(TAG, "Failure: ${ex.message}")
         }
-
-        return members
+        return TODO("Provide the return value")
     }
 }

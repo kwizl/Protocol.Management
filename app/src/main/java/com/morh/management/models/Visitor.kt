@@ -9,7 +9,7 @@ data class Visitor(
     val Gender: String,
     val ResidenceCode: String?,
     val Remarks: String?,
-    val DateAttendance: DateTime,
-    var DateCreated: DateTime,
-    val DateModified: DateTime,
+    val DateAttendance: String,
+    var DateCreated: String,
+    val DateModified: String?,
 )

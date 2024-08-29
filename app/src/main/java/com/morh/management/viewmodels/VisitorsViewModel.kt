@@ -10,6 +10,7 @@ import com.morh.management.repository.TokenRepository
 import com.morh.management.services.MembersService
 import com.morh.management.services.VisitorsService
 import com.morh.management.tables.Token
+import com.morh.management.wrappers.PaginationRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,9 +29,10 @@ class VisitorsViewModel(application: Application): AndroidViewModel(application)
     // Gets All Visitors
     private suspend fun getVisitors(): List<Visitor>?
     {
+        val request = PaginationRequest()
         val token = repository.getToken().last()
 
-        val visitors = _visitorsService.GetVisitors(token.TokenVal)
+        val visitors = _visitorsService.GetVisitors(token.TokenVal, request)
         return visitors
     }
 

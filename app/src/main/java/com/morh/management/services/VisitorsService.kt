@@ -15,17 +15,10 @@ class VisitorsService {
         val call = ApiClient.apiService.getVisitors(value, request)
         var visitors: List<Visitor>? = null
 
-        try
-        {
-            val response = call.execute();
-            val res = response.body();
-            if (res != null) {
-                visitors = res
-            }
-        }
-        catch (ex: Exception)
-        {
-            Log.i(TAG, "Failure: ${ex.message}")
+        val response = call.execute();
+        val res = response.body();
+        if (res != null) {
+            visitors = res
         }
 
         return visitors

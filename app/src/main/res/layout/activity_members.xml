@@ -2,7 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:androidx="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/grey">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/memberCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="12dp"
+        app:cardUserCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constaintStart_toStartOf="parent"
+        app:layout_constaintTop_toTopOf="parent" >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/memberSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:queryHint="Type Name"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MemberRecyclerView"

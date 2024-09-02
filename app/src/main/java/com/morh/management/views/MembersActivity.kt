@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,11 +37,19 @@ class MembersActivity : ComponentActivity() {
         try {
             // get the reference of RecyclerView
             val recyclerView: RecyclerView = findViewById(R.id.MemberRecyclerView)
+            val searchView: SearchView = findViewById(R.id.memberSearchView)
+
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.setHasFixedSize(true)
 
             val customAdapter = MembersCustomAdapter(members)
             recyclerView.adapter = customAdapter
+
+            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    TODO("Not yet implemented")
+                }
+            })
         }
         catch (ex: Exception)
         {

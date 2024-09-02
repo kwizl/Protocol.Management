@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.ProtocolManagement" parent="android:Theme.Material.Light.NoActionBar" />
 
@@ -14,5 +14,6 @@
 
     <style name="Theme.ProtocolManagement.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimationDuration">3</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:ignore="NewApi">@drawable/icon</item>
     </style>
 </resources>

@@ -1,13 +1,8 @@
 package com.morh.management.views
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Build
 import android.os.Bundle
-import android.service.controls.ControlsProviderService.TAG
-import android.util.Log
-import android.widget.Adapter
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.morh.management.features.MembersCustomAdapter
 import com.morh.management.models.Member
 import com.morh.management.viewmodels.MembersViewModel
-import com.morh.management.viewmodels.VisitorsViewModel
 import com.morh.protocolmanagement.R
-import com.morh.protocolmanagement.databinding.ActivityLoginBinding
-import com.morh.protocolmanagement.databinding.ActivityMembersBinding
-
 
 class MembersActivity : AppCompatActivity() {
 

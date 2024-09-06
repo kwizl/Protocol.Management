@@ -10,9 +10,9 @@ import com.morh.management.wrappers.PagedResponse
 import com.morh.management.wrappers.PaginationRequest
 
 class VisitorsService {
-    public fun GetVisitors(token: String, request: PaginationRequest): List<Visitor>? {
+    public fun GetAll(token: String, request: PaginationRequest): List<Visitor>? {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getVisitors(value, request)
+        val call = ApiClient.apiService.getAllVisitors(value, request)
         var visitors: List<Visitor>? = null
 
         val response = call.execute();
@@ -27,7 +27,7 @@ class VisitorsService {
     public fun GetAttended(token: String, request: PaginationRequest): List<Visitor>?
     {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getVisitorsAttendance(value, request)
+        val call = ApiClient.apiService.getVisitorsAttended(value, request)
         var visitors: List<Visitor>? = null
 
         val response = call.execute();

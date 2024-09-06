@@ -44,7 +44,7 @@ class VisitorsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_visitors)
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
-        val visitors = _visitorsViewModel.AllVisitors()
+        val visitors = _visitorsViewModel.GetAll()
 
         _searchView = findViewById<SearchView>(R.id.VisitorSearchView)!!
 

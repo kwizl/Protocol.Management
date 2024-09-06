@@ -19,20 +19,20 @@ interface ApiInterface {
     fun getToken(@Body user: User): Call<UserDTO>
 
     @POST("api/v1/Members/List")
-    fun getMembers(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>
+    fun getAllMembers(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>
 
     @POST("api/v1/Visitors/List")
-    fun getVisitors(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Visitor>?>
+    fun getAllVisitors(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Visitor>?>
 
-    @GET("api/v1/Members/Attended")
-    fun getMembersAttendance(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>
-
-    @GET("api/v1/Visitors/Attendance")
-    fun getVisitorsAttendance(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Visitor>?>
-
-    @GET("api/v1/Members/Missing")
+    @POST("api/v1/Members/Missing")
     fun getMembersMissing(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>
 
-    @GET("api/v1/Visitors/Attendance")
+    @POST("api/v1/Members/Attended")
+    fun getMembersAttended(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>
+
+    @POST("api/v1/Visitors/Attended")
     fun getVisitorsMissing(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Visitor>?>
+
+    @POST("api/v1/Visitors/Attended")
+    fun getVisitorsAttended(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Visitor>?>
 }

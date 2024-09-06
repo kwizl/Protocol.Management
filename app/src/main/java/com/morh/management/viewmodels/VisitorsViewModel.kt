@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.morh.management.features.LocalDatabase
+import com.morh.management.models.Member
 import com.morh.management.models.Visitor
 import com.morh.management.repository.TokenRepository
 import com.morh.management.services.MembersService
@@ -30,21 +31,69 @@ class VisitorsViewModel(application: Application): AndroidViewModel(application)
     }
 
     // Gets All Visitors
-    private suspend fun getVisitors(): List<Visitor>?
+    private suspend fun getAllVisitors(): List<Visitor>?
     {
         val request = PaginationRequest()
         val token = repository.getToken().last()
 
-        val visitors = _visitorsService.GetVisitors(token.TokenVal, request)
+        val visitors = _visitorsService.GetAll(token.TokenVal, request)
         return visitors
     }
 
     // Makes Async to Sync
-    fun AllVisitors(): List<Visitor>?
+    fun GetAll(): List<Visitor>?
     {
         var visitors: List<Visitor>? = null
         val job = CoroutineScope(Dispatchers.Default).launch {
-            visitors = getVisitors()
+            visitors = getAllVisitors()
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return visitors
+    }
+
+    // Get All Members
+    private suspend fun getMissingVisitors(): List<Visitor>?
+    {
+        val request = PaginationRequest()
+        val token = repository.getToken().last()
+
+        val visitors =  _visitorsService.GetMissing(token.TokenVal, request)
+        return visitors
+    }
+
+    // Makes Async to Sync
+    fun GetMissing(): List<Visitor>?
+    {
+        var visitors: List<Visitor>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            visitors = getMissingVisitors()
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return visitors
+    }
+
+    // Get Visitors Attendance
+    private suspend fun getVisitorsAttendance(): List<Visitor>?
+    {
+        val request = PaginationRequest()
+        val token = repository.getToken().last()
+
+        val visitors =  _visitorsService.GetMissing(token.TokenVal, request)
+        return visitors
+    }
+
+    // Makes Async to Sync
+    fun GetAttendance(): List<Visitor>?
+    {
+        var visitors: List<Visitor>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            visitors = getVisitorsAttendance()
         }
         runBlocking {
             job.join()

@@ -31,21 +31,69 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
     }
 
     // Get All Members
-    private suspend fun getMembers(): List<Member>?
+    private suspend fun getAllMembers(): List<Member>?
     {
         val request = PaginationRequest()
         val token = repository.getToken().last()
 
-        val members =  _membersService.GetMembers(token.TokenVal, request)
+        val members =  _membersService.GetAll(token.TokenVal, request)
         return members
     }
 
     // Makes Async to Sync
-    fun AllMembers(): List<Member>?
+    fun GetAll(): List<Member>?
     {
         var members: List<Member>? = null
         val job = CoroutineScope(Dispatchers.Default).launch {
-            members = getMembers()
+            members = getAllMembers()
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return members
+    }
+
+    // Get Missing Members
+    private suspend fun getMissingMembers(): List<Member>?
+    {
+        val request = PaginationRequest()
+        val token = repository.getToken().last()
+
+        val members =  _membersService.GetMissing(token.TokenVal, request)
+        return members
+    }
+
+    // Makes Async to Sync
+    fun GetMissing(): List<Member>?
+    {
+        var members: List<Member>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            members = getMissingMembers()
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return members
+    }
+
+    // Get Members Attendance
+    private suspend fun getMembersAttendance(): List<Member>?
+    {
+        val request = PaginationRequest()
+        val token = repository.getToken().last()
+
+        val members =  _membersService.GetMissing(token.TokenVal, request)
+        return members
+    }
+
+    // Makes Async to Sync
+    fun GetAttendance(): List<Member>?
+    {
+        var members: List<Member>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            members = getMembersAttendance()
         }
         runBlocking {
             job.join()

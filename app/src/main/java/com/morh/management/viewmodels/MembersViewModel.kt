@@ -1,6 +1,8 @@
 package com.morh.management.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -12,13 +14,16 @@ import com.morh.management.tables.Token
 import com.morh.management.wrappers.PaginationRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+@RequiresApi(Build.VERSION_CODES.R)
 class MembersViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _membersService = MembersService();
     private var repository: TokenRepository
+    private val _membersService = MembersService();
 
     init {
         val dao = LocalDatabase.getInstance(application).getTokenDao()

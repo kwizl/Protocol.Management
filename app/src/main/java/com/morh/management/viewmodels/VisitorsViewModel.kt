@@ -1,6 +1,8 @@
 package com.morh.management.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -16,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+@RequiresApi(Build.VERSION_CODES.R)
 class VisitorsViewModel(application: Application): AndroidViewModel(application) {
 
     private val _visitorsService = VisitorsService();

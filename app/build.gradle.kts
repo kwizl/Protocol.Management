@@ -41,6 +41,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        dataBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -70,6 +71,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx.v2)
     implementation(libs.lottie)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.appcompat.resources)
+    //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler.v250)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

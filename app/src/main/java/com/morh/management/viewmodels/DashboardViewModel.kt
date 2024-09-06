@@ -1,6 +1,8 @@
 package com.morh.management.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -12,6 +14,7 @@ import com.morh.management.tables.Token
 import com.morh.management.wrappers.PaginationRequest
 import kotlinx.coroutines.Dispatchers
 
+@RequiresApi(Build.VERSION_CODES.R)
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
     private var token: String?
     private val _membersService = MembersService()

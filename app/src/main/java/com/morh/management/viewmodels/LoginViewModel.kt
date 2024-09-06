@@ -1,6 +1,8 @@
 package com.morh.management.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.morh.management.features.LocalDatabase
@@ -13,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+@RequiresApi(Build.VERSION_CODES.R)
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val _loginService = LoginService()
     private var repository: TokenRepository
@@ -24,6 +27,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Returns true if authentication is successful otherwise false
+    @RequiresApi(Build.VERSION_CODES.R)
     private suspend fun loginUser(username: String, password: String): Boolean
     {
         val user = User(username, password)
@@ -44,7 +48,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun Login(username: String, password: String): Boolean
+    public fun Login(username: String, password: String): Boolean
     {
         var state: Boolean = false
         val job = CoroutineScope(Dispatchers.Default).launch {

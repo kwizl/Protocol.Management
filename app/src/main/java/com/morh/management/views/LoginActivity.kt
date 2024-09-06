@@ -2,8 +2,10 @@ package com.morh.management.views
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import com.morh.management.viewmodels.LoginViewModel
@@ -14,6 +16,7 @@ class LoginActivity : ComponentActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var _loginViewModel: LoginViewModel
 
+    @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +38,9 @@ class LoginActivity : ComponentActivity() {
             val state = _loginViewModel.Login(username, password)
 
             if (state) {
-                val intent = Intent(this, MembersActivity::class.java)
-                startActivity(intent)
+                //val intent = Intent(this, MembersActivity::class.java)
+                //startActivity(intent)
+                startActivity(Intent(this, MembersActivity::class.java))
             }
             else {
                 finish();

@@ -1,59 +1,85 @@
 package com.morh.management.views
 
+import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
-import androidx.activity.ComponentActivity
+import android.widget.Adapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.morh.management.features.MembersCustomAdapter
+import com.morh.management.models.Member
 import com.morh.management.viewmodels.MembersViewModel
+import com.morh.management.viewmodels.VisitorsViewModel
 import com.morh.protocolmanagement.R
+import com.morh.protocolmanagement.databinding.ActivityLoginBinding
 import com.morh.protocolmanagement.databinding.ActivityMembersBinding
 
 
-class MembersActivity : ComponentActivity() {
-    private lateinit var _binding: ActivityMembersBinding
+class MembersActivity : AppCompatActivity() {
+
+    private lateinit var _searchView: SearchView
+    private lateinit var _recyclerView: RecyclerView
     private lateinit var _membersViewModel: MembersViewModel
+    private lateinit var _customAdapter: MembersCustomAdapter
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // MVVM Pattern Binds View to ViewModel
-        _binding = ActivityMembersBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_members)
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
-
         val members = _membersViewModel.AllMembers()
 
-        try {
-            // get the reference of RecyclerView
-            val recyclerView: RecyclerView = findViewById(R.id.MemberRecyclerView)
-            val searchView: SearchView = findViewById(R.id.memberSearchView)
+        _searchView = findViewById<SearchView>(R.id.MemberSearchView)!!
 
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.setHasFixedSize(true)
+        _recyclerView = findViewById<RecyclerView>(R.id.MemberRecyclerView)!!
+        _recyclerView.layoutManager = LinearLayoutManager(this)
+        _recyclerView.setHasFixedSize(true)
 
-            val customAdapter = MembersCustomAdapter(members)
-            recyclerView.adapter = customAdapter
+        _customAdapter = MembersCustomAdapter(members)
+        _recyclerView.adapter = _customAdapter
 
-            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    TODO("Not yet implemented")
+        _searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                filter(newText, members)
+                return true
+            }
+        })
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filter(newText: String, members: List<Member>?)
+    {
+        val filteredMembers = ArrayList<Member>()
+
+        if (members != null) {
+            for (member in members)
+            {
+                if (member.Name.lowercase().contains(newText.lowercase()))
+                {
+                    filteredMembers.add(member)
                 }
-            })
+            }
         }
-        catch (ex: Exception)
-        {
-            Log.i(TAG, "${ex.message}")
-        }
+
+        _customAdapter.filteredList(filteredMembers)
+        _customAdapter.notifyDataSetChanged()
     }
 }

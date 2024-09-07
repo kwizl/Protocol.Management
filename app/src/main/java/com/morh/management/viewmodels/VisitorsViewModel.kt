@@ -124,8 +124,9 @@ class VisitorsViewModel(application: Application): AndroidViewModel(application)
             currentDate = date.AttendanceDate
         }
         else {
-            val date = _sundayDateRepository.getDate().last()
-            currentDate = "09/01/2024"
+            val dt = SundayDate(0, "09/01/2024")
+            _sundayDateRepository.insert(dt)
+            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
         }
 
         val token = _tokenRepository.getToken().last()

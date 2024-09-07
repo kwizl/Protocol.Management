@@ -1,20 +1,21 @@
 package com.morh.management.views
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.morh.management.viewmodels.MembersViewModel
 import com.morh.management.viewmodels.VisitorsViewModel
 import com.morh.protocolmanagement.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class AttendanceActivity : AppCompatActivity() {
     private lateinit var _memberCardView: CardView
@@ -27,6 +28,8 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var _missingVisitorsTextView: TextView
     private lateinit var _membersViewModel: MembersViewModel
     private lateinit var _visitorsViewModel: VisitorsViewModel
+
+    private val calendar = Calendar.getInstance()
 
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("UnsafeIntentLaunch", "SetTextI18n")
@@ -102,7 +105,30 @@ class AttendanceActivity : AppCompatActivity() {
         }
 
         _visitorCardView.setOnClickListener {
-            startActivity(Intent(this, VisitorsAttendanceActivity::class.java))
+            val dt = showDatePicker()
+            val intent = Intent(this, VisitorsAttendanceActivity::class.java).also {
+                it.putExtra("Date", dt)
+                startActivity(it)
+            }
         }
+    }
+
+    private fun showDatePicker(): String {
+        var date: String = ""
+        val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, monthOfYear, dayOfMonth)
+
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            date = dateFormat.format(selectedDate.time)
+        },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.show()
+
+        return date
     }
 }

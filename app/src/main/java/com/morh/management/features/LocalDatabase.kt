@@ -15,17 +15,20 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.morh.management.interfaces.SundayDateDao
 import com.morh.management.interfaces.TokenDao
+import com.morh.management.tables.SundayDate
 import com.morh.management.tables.Token
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-@Database(entities = [Token::class], version = 1)
+@Database(entities = [Token::class, SundayDate::class], version = 1)
 abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun getTokenDao(): TokenDao
+    abstract fun getSundayDateDao(): SundayDateDao
 
     companion object {
         private var INSTANCE: LocalDatabase? = null

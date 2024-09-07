@@ -20,7 +20,6 @@
         app:iconifiedByDefault="false"
         android:focusable="false" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MemberRecyclerView"
         android:layout_width="match_parent"

@@ -15,6 +15,9 @@ interface TokenDao {
     @Update
     fun update(vararg token: Token)
 
+    @Query("DELETE FROM Token")
+    fun deleteAll()
+
     @Query("SELECT * FROM Token ORDER BY id ASC")
     fun get(): List<Token>
 }

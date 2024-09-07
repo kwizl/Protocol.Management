@@ -24,10 +24,10 @@ class VisitorsService {
         return visitors
     }
 
-    public fun GetAttended(token: String, request: PaginationRequest): List<Visitor>?
+    public fun GetAttended(token: String, Page: Int, PageNumber: Int, Date: String): List<Visitor>?
     {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getVisitorsAttended(value, request)
+        val call = ApiClient.apiService.getVisitorsAttended(value, Page, PageNumber, Date)
         var visitors: List<Visitor>? = null
 
         val response = call.execute();
@@ -39,10 +39,10 @@ class VisitorsService {
         return visitors
     }
 
-    public fun GetMissing(token: String, request: PaginationRequest): List<Visitor>?
+    public fun GetMissing(token: String, Page: Int, PageNumber: Int, Date: String): List<Visitor>?
     {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getVisitorsMissing(value, request)
+        val call = ApiClient.apiService.getVisitorsMissing(value, Page, PageNumber, Date)
         var visitors: List<Visitor>? = null
 
         val response = call.execute();

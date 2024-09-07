@@ -29,10 +29,10 @@ class MembersService {
         return members
     }
 
-    public fun GetAttendance(token: String, request: PaginationRequest): List<Member>?
+    public fun GetAttendance(token: String, Page: Int, PageNumber: Int, Date: String): List<Member>?
     {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getMembersAttended(value, request)
+        val call = ApiClient.apiService.getMembersAttended(value, Page, PageNumber, Date)
         var members: List<Member>? = null
 
         val response = call.execute();
@@ -44,10 +44,10 @@ class MembersService {
         return members
     }
 
-    public fun GetMissing(token: String, request: PaginationRequest): List<Member>?
+    public fun GetMissing(token: String, Page: Int, PageNumber: Int, Date: String): List<Member>?
     {
         val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getMembersMissing(value, request)
+        val call = ApiClient.apiService.getMembersMissing(value, Page, PageNumber, Date)
         var members: List<Member>? = null
 
         val response = call.execute();

@@ -17,4 +17,8 @@ class TokenRepository(private val tokenDao: TokenDao) {
     suspend fun insert(token: Token) {
         return tokenDao.insert(token)
     }
+
+    suspend fun truncate() {
+        return tokenDao.deleteAll()
+    }
 }

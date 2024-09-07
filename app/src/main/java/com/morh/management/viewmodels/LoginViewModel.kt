@@ -36,6 +36,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         if (login != null) {
             val job = CoroutineScope(Dispatchers.IO).launch {
                 val token = Token(0, login)
+
+                repository.truncate()
                 repository.insert(token)
             }
             runBlocking {

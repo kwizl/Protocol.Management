@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.morh.management.views.DashboardActivity">
+    tools:context="com.morh.management.views.AttendanceActivity">
 
     <LinearLayout
         android:id="@+id/view"
@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@color/white"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -81,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@color/white"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -119,50 +121,50 @@
             android:layout_gravity="center_horizontal" />
 
         <TextView
+            android:id="@+id/TotalMembersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Members: "
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />
 
         <TextView
+            android:id="@+id/MembersAttendedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attended Members: "
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />
 
         <TextView
+            android:id="@+id/MissingMembersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Missing Members: "
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />
 
         <TextView
+            android:id="@+id/TotalVisitorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Visitors: "
             android:layout_marginTop="30dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />
 
         <TextView
+            android:id="@+id/VisitorsAttendedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attended Visitors: "
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />
 
         <TextView
+            android:id="@+id/MissingVisitorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Missing Visitors: "
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />

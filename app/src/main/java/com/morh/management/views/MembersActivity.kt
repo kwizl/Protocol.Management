@@ -30,7 +30,7 @@ class MembersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_members)
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
-        val members = _membersViewModel.AllMembers()
+        val members = _membersViewModel.GetAll()
 
         _searchView = findViewById<SearchView>(R.id.MemberSearchView)!!
 

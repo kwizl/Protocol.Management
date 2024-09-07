@@ -40,7 +40,7 @@ class LoginActivity : ComponentActivity() {
             if (state) {
                 //val intent = Intent(this, MembersActivity::class.java)
                 //startActivity(intent)
-                startActivity(Intent(this, MembersActivity::class.java))
+                startActivity(Intent(this, DashboardActivity::class.java))
             }
             else {
                 finish();

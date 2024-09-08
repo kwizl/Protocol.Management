@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.appcompat.resources)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.androidx.room.compiler.v250)
     implementation(libs.androidx.room.runtime)

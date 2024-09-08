@@ -12,6 +12,10 @@ class SundayDateRepository(private val sundayDateDao: SundayDateDao) {
         return sundayDateDao.insert(sundayDate)
     }
 
+    suspend fun delete(id: Int) {
+        return sundayDateDao.delete(id)
+    }
+
     suspend fun truncate() {
         return sundayDateDao.deleteAll()
     }

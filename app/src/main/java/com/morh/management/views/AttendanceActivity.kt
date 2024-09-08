@@ -101,26 +101,28 @@ class AttendanceActivity : AppCompatActivity() {
         }
 
         _memberCardView.setOnClickListener {
-            startActivity(Intent(this, MembersActivity::class.java))
+            showMemberDatePicker()
         }
 
         _visitorCardView.setOnClickListener {
-            val dt = showDatePicker()
-            val intent = Intent(this, VisitorsAttendanceActivity::class.java).also {
-                it.putExtra("Date", dt)
-                startActivity(it)
-            }
+            showVisitorDatePicker()
         }
     }
 
-    private fun showDatePicker(): String {
+    // DatePicker for Member Attendance
+    private fun showMemberDatePicker() {
         var date: String = ""
         val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
             val selectedDate = Calendar.getInstance()
             selectedDate.set(year, monthOfYear, dayOfMonth)
 
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
             date = dateFormat.format(selectedDate.time)
+
+            val intent = Intent(this, MembersAttendanceActivity::class.java).also {
+                it.putExtra("MemberDate", date)
+                startActivity(it)
+            }
         },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -128,7 +130,28 @@ class AttendanceActivity : AppCompatActivity() {
         )
 
         datePickerDialog.show()
+    }
 
-        return date
+    // DatePicker for Visitor Attendance
+    private fun showVisitorDatePicker() {
+        var date: String = ""
+        val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, monthOfYear, dayOfMonth)
+
+            val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+            date = dateFormat.format(selectedDate.time)
+
+            val intent = Intent(this, VisitorsAttendanceActivity::class.java).also {
+                it.putExtra("VisitorDate", date)
+                startActivity(it)
+            }
+        },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.show()
     }
 }

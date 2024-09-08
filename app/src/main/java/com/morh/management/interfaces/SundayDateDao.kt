@@ -12,6 +12,9 @@ interface SundayDateDao {
     @Insert
     fun insert(vararg sundayDate: SundayDate)
 
+    @Query("DELETE FROM SundayDate WHERE id = :key")
+    fun delete(key: Int)
+
     @Query("DELETE FROM SundayDate")
     fun deleteAll()
 

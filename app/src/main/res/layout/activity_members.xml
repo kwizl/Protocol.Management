@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/grey"
+    android:background="@color/white"
     tools:context="com.morh.management.views.MembersActivity">
 
     <androidx.appcompat.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="8dp"
         android:id="@+id/MemberSearchView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:iconifiedByDefault="false"
-        android:focusable="false" />
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:elevation="40dp"
+        android:queryHint="Search Name..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/MemberRecyclerView"

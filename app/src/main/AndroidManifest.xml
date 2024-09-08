@@ -13,10 +13,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name="com.morh.management.views.VisitorsAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.morh.management.views.MembersAttendanceActivity"
             android:exported="false" />
         <activity
             android:name="com.morh.management.views.AttendanceActivity"

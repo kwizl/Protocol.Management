@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/grey"
+    android:background="@color/white"
     tools:context="com.morh.management.views.VisitorsAttendanceActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/VisitorRecyclerView"
+        android:id="@+id/VisitorAttendanceRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

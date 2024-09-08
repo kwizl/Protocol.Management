@@ -55,7 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:background="@drawable/button"
+            android:elevation="40dp"
             android:text="@string/Login"
+            android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="18sp" />
 

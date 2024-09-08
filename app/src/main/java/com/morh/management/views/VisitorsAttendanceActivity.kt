@@ -28,14 +28,12 @@ class VisitorsAttendanceActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_visitors_attendance)
 
-        val date = intent.getStringExtra("Date")
-
-        setContentView(R.layout.activity_visitors)
+        val date = intent.getStringExtra("VisitorDate")
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
         val visitors = _visitorsViewModel.GetAttendance(date)
 
-        _recyclerView = findViewById<RecyclerView>(R.id.VisitorRecyclerView)!!
+        _recyclerView = findViewById<RecyclerView>(R.id.VisitorAttendanceRecyclerView)!!
         _recyclerView.layoutManager = LinearLayoutManager(this)
         _recyclerView.setHasFixedSize(true)
 

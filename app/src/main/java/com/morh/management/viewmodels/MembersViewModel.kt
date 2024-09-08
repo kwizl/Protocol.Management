@@ -33,6 +33,7 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
 
         _tokenRepository = TokenRepository(tokenDao)
         _sundayDateRepository = SundayDateRepository(sundayDateDao)
+
     }
 
     // Get All Members
@@ -66,22 +67,28 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
         val calendar: Calendar = Calendar.getInstance()
         val day: Int = calendar.get(Calendar.DAY_OF_WEEK)
 
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val sdf = SimpleDateFormat("MM/dd/yyyy")
         var currentDate = sdf.format(java.util.Date())
 
         if (day == Calendar.SUNDAY && datePicked == null) {
-            _sundayDateRepository.truncate()
-
             val dt = SundayDate(0, currentDate)
             _sundayDateRepository.insert(dt)
         }
         else if (day == Calendar.SUNDAY) {
             val date = _sundayDateRepository.getDate().last()
-            currentDate = date.AttendanceDate
+
+            if (date.AttendanceDate == null) {
+                val dt = SundayDate(0, datePicked!!)
+                _sundayDateRepository.insert(dt)
+                currentDate = datePicked
+            }
+            else {
+                currentDate = date.AttendanceDate
+            }
+
         }
         else {
-            val date = _sundayDateRepository.getDate().last()
-            currentDate = "09/01/2024"
+            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
         }
 
         val token = _tokenRepository.getToken().last()
@@ -108,25 +115,36 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
     @SuppressLint("SimpleDateFormat")
     private suspend fun getMembersAttendance(datePicked: String?): List<Member>?
     {
+        val count = _sundayDateRepository.getDate()
+        if (count.size > 1) {
+            val dt = count.last()
+            _sundayDateRepository.delete(dt.id)
+        }
+
         val calendar: Calendar = Calendar.getInstance()
         val day: Int = calendar.get(Calendar.DAY_OF_WEEK)
 
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val sdf = SimpleDateFormat("MM/dd/yyyy")
         var currentDate = sdf.format(java.util.Date())
 
         if (day == Calendar.SUNDAY && datePicked == null) {
-            _sundayDateRepository.truncate()
-
             val dt = SundayDate(0, currentDate)
             _sundayDateRepository.insert(dt)
         }
         else if (day == Calendar.SUNDAY) {
             val date = _sundayDateRepository.getDate().last()
-            currentDate = date.AttendanceDate
+
+            if (date.AttendanceDate == null) {
+                val dt = SundayDate(0, datePicked!!)
+                _sundayDateRepository.insert(dt)
+                currentDate = datePicked
+            }
+            else {
+                currentDate = datePicked
+            }
+
         }
         else {
-            val dt = SundayDate(0, "09/01/2024")
-            _sundayDateRepository.insert(dt)
             currentDate = _sundayDateRepository.getDate().last().AttendanceDate
         }
 

@@ -22,7 +22,6 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Sleeps for 3 seconds
-        Thread.sleep(10000)
         installSplashScreen()
 
         // MVVM Pattern Binds View to ViewModel
@@ -43,8 +42,8 @@ class LoginActivity : ComponentActivity() {
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
             else {
-                finish();
-                this.startActivity(getIntent());
+                finish()
+                this.startActivity(getIntent())
             }
         }
     }

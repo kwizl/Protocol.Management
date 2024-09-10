@@ -6,7 +6,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import com.morh.management.features.LocalDatabase
-import com.morh.management.interfaces.SundayDateDao
 import com.morh.management.models.Member
 import com.morh.management.repository.SundayDateRepository
 import com.morh.management.repository.TokenRepository
@@ -24,7 +23,7 @@ import java.util.Calendar
 class MembersViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _tokenRepository: TokenRepository
-    private val _membersService = MembersService();
+    private val _membersService = MembersService()
     private var _sundayDateRepository: SundayDateRepository
 
     init {
@@ -132,6 +131,7 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
             _sundayDateRepository.insert(dt)
         }
         else if (day == Calendar.SUNDAY) {
+
             val date = _sundayDateRepository.getDate().last()
 
             if (date.AttendanceDate == null) {

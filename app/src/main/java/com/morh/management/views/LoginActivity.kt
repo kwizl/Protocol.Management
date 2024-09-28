@@ -4,15 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import com.morh.management.viewmodels.LoginViewModel
 import com.morh.protocolmanagement.databinding.ActivityLoginBinding
 
 
-class LoginActivity : ComponentActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var _loginViewModel: LoginViewModel
 
@@ -20,9 +21,6 @@ class LoginActivity : ComponentActivity() {
     @SuppressLint("UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Sleeps for 3 seconds
-        installSplashScreen()
 
         // MVVM Pattern Binds View to ViewModel
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -37,12 +35,12 @@ class LoginActivity : ComponentActivity() {
             val state = _loginViewModel.Login(username, password)
 
             if (state) {
-                //val intent = Intent(this, MembersActivity::class.java)
-                //startActivity(intent)
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
             else {
-                finish()
+                val toast = Toast.makeText(this, "Authentication failed", Toast.LENGTH_LONG)
+                toast.show()
+
                 this.startActivity(getIntent())
             }
         }

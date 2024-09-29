@@ -46,13 +46,14 @@
                 android:layout_column="0">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="170dp"
+                        android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:contentDescription="@string/member"
                         android:src="@drawable/person" />
@@ -79,13 +80,14 @@
                 app:cardElevation="12dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="170dp"
+                        android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:contentDescription="@string/member"
                         android:src="@drawable/person" />

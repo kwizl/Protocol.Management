@@ -7,10 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.morh.management.views.VisitorsAttendanceActivity">
+    tools:context="com.morh.management.views.VisitorsMissingActivity">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/VisitorAttendanceSearchView"
+        android:id="@+id/VisitorMissingSearchView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="40dp"
@@ -18,10 +18,10 @@
         android:queryHint="Search Name..." />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/VisitorAttendanceRecyclerView"
+        android:id="@+id/VisitorsMissingRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

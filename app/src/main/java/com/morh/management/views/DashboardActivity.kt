@@ -14,6 +14,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var _memberCardView: CardView
     private lateinit var _visitorCardView: CardView
+    private lateinit var _missingCardView: CardView
     private lateinit var _attendanceCardView: CardView
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -24,6 +25,7 @@ class DashboardActivity : AppCompatActivity() {
 
         _memberCardView = findViewById<CardView>(R.id.MemberCardView)
         _visitorCardView = findViewById<CardView>(R.id.VisitorCardView)
+        _missingCardView = findViewById<CardView>(R.id.MissingCardView)
         _attendanceCardView = findViewById<CardView>(R.id.AttendanceCardView)
 
         _memberCardView.setOnClickListener {
@@ -32,6 +34,10 @@ class DashboardActivity : AppCompatActivity() {
 
         _visitorCardView.setOnClickListener {
             startActivity(Intent(this, VisitorsActivity::class.java))
+        }
+
+        _missingCardView.setOnClickListener {
+            startActivity(Intent(this, MissingActivity::class.java))
         }
 
         _attendanceCardView.setOnClickListener {

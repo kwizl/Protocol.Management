@@ -10,39 +10,37 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.morh.management.features.VisitorsCustomAdapter
-import com.morh.management.models.Visitor
-import com.morh.management.viewmodels.VisitorsViewModel
+import com.morh.management.features.MembersCustomAdapter
+import com.morh.management.models.Member
+import com.morh.management.viewmodels.MembersViewModel
 import com.morh.protocolmanagement.R
 
-class VisitorsAttendanceActivity : AppCompatActivity() {
-
+class MembersMissingActivity : AppCompatActivity() {
     private lateinit var _searchView: SearchView
     private lateinit var _recyclerView: RecyclerView
-    private lateinit var _customAdapter: VisitorsCustomAdapter
-    private lateinit var _visitorsViewModel: VisitorsViewModel
+    private lateinit var _customAdapter: MembersCustomAdapter
+    private lateinit var _membersViewModel: MembersViewModel
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.activity_visitors_attendance)
+        setContentView(R.layout.activity_members_missing)
 
-        val date = intent.getStringExtra("VisitorDate")
+        val date = intent.getStringExtra("MemberDate")
 
-        _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
-        val visitors = _visitorsViewModel.GetAttendance(date)
+        _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
+        val members = _membersViewModel.GetAttendance(date)
 
-        _recyclerView = findViewById<RecyclerView>(R.id.VisitorAttendanceRecyclerView)!!
+        _recyclerView = findViewById<RecyclerView>(R.id.MembersMissingRecyclerView)!!
         _recyclerView.layoutManager = LinearLayoutManager(this)
         _recyclerView.setHasFixedSize(true)
 
-        _customAdapter = VisitorsCustomAdapter(visitors)
+        _customAdapter = MembersCustomAdapter(members)
         _recyclerView.adapter = _customAdapter
 
-        _searchView = findViewById<SearchView>(R.id.VisitorAttendanceSearchView)!!
-
+        _searchView = findViewById<SearchView>(R.id.MemberMissingSearchView)!!
         _searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
 
@@ -51,28 +49,25 @@ class VisitorsAttendanceActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                filter(newText, visitors)
+                filter(newText, members)
                 return true
             }
         })
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun filter(newText: String, visitors: List<Visitor>?)
-    {
-        val filteredVisitors = ArrayList<Visitor>()
+    private fun filter(newText: String, members: List<Member>?) {
+        val filteredMembers = ArrayList<Member>()
 
-        if (visitors != null) {
-            for (member in visitors)
-            {
-                if (member.Name.lowercase().contains(newText.lowercase()))
-                {
-                    filteredVisitors.add(member)
+        if (members != null) {
+            for (member in members) {
+                if (member.Name.lowercase().contains(newText.lowercase())) {
+                    filteredMembers.add(member)
                 }
             }
         }
 
-        _customAdapter.filteredList(filteredVisitors)
+        _customAdapter.filteredList(filteredMembers)
         _customAdapter.notifyDataSetChanged()
     }
 }

@@ -32,7 +32,7 @@ class VisitorsAttendanceActivity : AppCompatActivity() {
         val date = intent.getStringExtra("VisitorDate")
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
-        val visitors = _visitorsViewModel.GetAttendance(date)
+        val visitors = _visitorsViewModel.GetMissing(date)
 
         _recyclerView = findViewById<RecyclerView>(R.id.VisitorAttendanceRecyclerView)!!
         _recyclerView.layoutManager = LinearLayoutManager(this)

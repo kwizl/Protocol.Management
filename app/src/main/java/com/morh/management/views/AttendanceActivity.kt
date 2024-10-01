@@ -24,8 +24,6 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var _membersAttendedTextView: TextView
     private lateinit var _totalVisitorsTextView: TextView
     private lateinit var _visitorsAttendedTextView: TextView
-    private lateinit var _missingMembersTextView: TextView
-    private lateinit var _missingVisitorsTextView: TextView
     private lateinit var _membersViewModel: MembersViewModel
     private lateinit var _visitorsViewModel: VisitorsViewModel
 
@@ -37,14 +35,12 @@ class AttendanceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attendance)
 
-        _memberCardView = findViewById<CardView>(R.id.MemberCardView)
-        _visitorCardView = findViewById<CardView>(R.id.VisitorCardView)
+        _memberCardView = findViewById<CardView>(R.id.Attendance_MemberAttendedCardView)
+        _visitorCardView = findViewById<CardView>(R.id.Attendance_VisitorAttendedCardView)
         _totalMembersTextView = findViewById<TextView>(R.id.TotalMembersText)
         _membersAttendedTextView = findViewById<TextView>(R.id.MembersAttendedText)
         _totalVisitorsTextView = findViewById<TextView>(R.id.TotalVisitorsText)
         _visitorsAttendedTextView = findViewById<TextView>(R.id.VisitorsAttendedText)
-        _missingMembersTextView = findViewById<TextView>(R.id.MissingMembersText)
-        _missingVisitorsTextView = findViewById<TextView>(R.id.MissingVisitorsText)
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
 
@@ -65,14 +61,6 @@ class AttendanceActivity : AppCompatActivity() {
             _membersAttendedTextView.text = "0"
         }
 
-        if (allMembers != null && membersAttendance != null) {
-            var num = allMembers.size - membersAttendance.size
-            _missingMembersTextView.text = "Missing: ${num.toString()}"
-        }
-        else {
-            _missingMembersTextView.text = "0"
-        }
-
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
 
         val allVisitors = _visitorsViewModel.GetAll()
@@ -83,14 +71,6 @@ class AttendanceActivity : AppCompatActivity() {
         }
         else {
             _totalVisitorsTextView.text = "0"
-        }
-
-        if (allVisitors != null && visitorsAttendance != null) {
-            val num = allVisitors.size - visitorsAttendance.size
-            _missingVisitorsTextView.text = "Missing: ${num.toString()}"
-        }
-        else {
-            _missingVisitorsTextView.text = "0"
         }
 
         if (visitorsAttendance != null) {

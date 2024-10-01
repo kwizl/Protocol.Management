@@ -21,9 +21,7 @@ class MissingActivity : AppCompatActivity() {
     private lateinit var _memberCardView: CardView
     private lateinit var _visitorCardView: CardView
     private lateinit var _totalMembersTextView: TextView
-    private lateinit var _membersMissedTextView: TextView
     private lateinit var _totalVisitorsTextView: TextView
-    private lateinit var _visitorsMissedTextView: TextView
     private lateinit var _missingMembersTextView: TextView
     private lateinit var _missingVisitorsTextView: TextView
     private lateinit var _membersViewModel: MembersViewModel
@@ -39,10 +37,8 @@ class MissingActivity : AppCompatActivity() {
 
         _memberCardView = findViewById<CardView>(R.id.MemberCardView)
         _visitorCardView = findViewById<CardView>(R.id.VisitorCardView)
-        _totalMembersTextView = findViewById<TextView>(R.id.TotalMembersText)
-        _membersMissedTextView = findViewById<TextView>(R.id.MembersMissedText)
-        _totalVisitorsTextView = findViewById<TextView>(R.id.TotalVisitorsText)
-        _visitorsMissedTextView = findViewById<TextView>(R.id.VisitorsMissedText)
+        _totalMembersTextView = findViewById<TextView>(R.id.Missing_TotalMembersText)
+        _totalVisitorsTextView = findViewById<TextView>(R.id.Missing_TotalVisitorsText)
         _missingMembersTextView = findViewById<TextView>(R.id.MissingMembersText)
         _missingVisitorsTextView = findViewById<TextView>(R.id.MissingVisitorsText)
 
@@ -59,15 +55,7 @@ class MissingActivity : AppCompatActivity() {
         }
 
         if (membersMissing != null) {
-            _membersMissedTextView.text = "Attendance: ${membersMissing.size.toString()}"
-        }
-        else {
-            _membersMissedTextView.text = "0"
-        }
-
-        if (allMembers != null && membersMissing != null) {
-            var num = allMembers.size - membersMissing.size
-            _missingMembersTextView.text = "Missing: ${num.toString()}"
+            _missingMembersTextView.text = "Missing: ${membersMissing.size.toString()}"
         }
         else {
             _missingMembersTextView.text = "0"
@@ -76,7 +64,7 @@ class MissingActivity : AppCompatActivity() {
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
 
         val allVisitors = _visitorsViewModel.GetAll()
-        val visitorsMissing = _visitorsViewModel.GetAttendance(null)
+        val visitorsMissing = _visitorsViewModel.GetMissing(null)
 
         if (allVisitors != null) {
             _totalVisitorsTextView.text = "Total Visitors: ${allVisitors.size.toString()}"
@@ -85,19 +73,12 @@ class MissingActivity : AppCompatActivity() {
             _totalVisitorsTextView.text = "0"
         }
 
-        if (allVisitors != null && visitorsMissing != null) {
-            val num = allVisitors.size - visitorsMissing.size
+        if (visitorsMissing != null) {
+            val num = visitorsMissing.size
             _missingVisitorsTextView.text = "Missing: ${num.toString()}"
         }
         else {
             _missingVisitorsTextView.text = "0"
-        }
-
-        if (visitorsMissing != null) {
-            _visitorsMissedTextView.text = "Attendance: ${visitorsMissing.size.toString()}"
-        }
-        else {
-            _visitorsMissedTextView.text = "0"
         }
 
         _memberCardView.setOnClickListener {
@@ -109,7 +90,7 @@ class MissingActivity : AppCompatActivity() {
         }
     }
 
-    // DatePicker for Member Attendance
+    // DatePicker for Member Missing
     private fun showMemberDatePicker() {
         var date: String = ""
         val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
@@ -119,7 +100,7 @@ class MissingActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
             date = dateFormat.format(selectedDate.time)
 
-            val intent = Intent(this, MembersAttendanceActivity::class.java).also {
+            val intent = Intent(this, MembersMissingActivity::class.java).also {
                 it.putExtra("MemberDate", date)
                 startActivity(it)
             }
@@ -132,7 +113,7 @@ class MissingActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    // DatePicker for Visitor Attendance
+    // DatePicker for Visitor Missing
     private fun showVisitorDatePicker() {
         var date: String = ""
         val datePickerDialog = DatePickerDialog(this, { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->

@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
+import com.google.type.DateTime
 import com.morh.management.features.LocalDatabase
 import com.morh.management.models.Member
 import com.morh.management.repository.SundayDateRepository
@@ -87,7 +88,8 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
 
         }
         else {
-            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
+            calendar.add(Calendar.DATE, -day + 1)
+            currentDate = sdf.format(calendar.time)
         }
 
         val token = _tokenRepository.getToken().last()
@@ -145,7 +147,9 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
 
         }
         else {
-            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
+            calendar.add(Calendar.DATE, -day + 1)
+
+            currentDate = sdf.format(calendar.time)
         }
 
         val token = _tokenRepository.getToken().last()

@@ -86,7 +86,9 @@ class VisitorsViewModel(application: Application): AndroidViewModel(application)
 
         }
         else {
-            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
+            calendar.add(Calendar.DATE, -day + 1)
+
+            currentDate = sdf.format(calendar.time)
         }
 
         val token = _tokenRepository.getToken().last()
@@ -143,7 +145,9 @@ class VisitorsViewModel(application: Application): AndroidViewModel(application)
 
         }
         else {
-            currentDate = _sundayDateRepository.getDate().last().AttendanceDate
+            calendar.add(Calendar.DATE, -day + 1)
+
+            currentDate = sdf.format(calendar.time)
         }
 
         val token = _tokenRepository.getToken().last()

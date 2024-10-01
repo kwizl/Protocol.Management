@@ -36,7 +36,7 @@
         android:layout_margin="20dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/MemberCardView"
+            android:id="@+id/Attendance_MemberAttendedCardView"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -74,7 +74,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/VisitorCardView"
+            android:id="@+id/Attendance_VisitorAttendedCardView"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -146,14 +146,6 @@
             android:textColor="@color/purple_700" />
 
         <TextView
-            android:id="@+id/MissingMembersText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_700" />
-
-        <TextView
             android:id="@+id/TotalVisitorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,14 +156,6 @@
 
         <TextView
             android:id="@+id/VisitorsAttendedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_700" />
-
-        <TextView
-            android:id="@+id/MissingVisitorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"

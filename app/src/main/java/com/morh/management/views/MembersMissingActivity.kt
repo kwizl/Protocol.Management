@@ -31,7 +31,7 @@ class MembersMissingActivity : AppCompatActivity() {
         val date = intent.getStringExtra("MemberDate")
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
-        val members = _membersViewModel.GetAttendance(date)
+        val members = _membersViewModel.GetMissing(date)
 
         _recyclerView = findViewById<RecyclerView>(R.id.MembersMissingRecyclerView)!!
         _recyclerView.layoutManager = LinearLayoutManager(this)

@@ -130,15 +130,7 @@
             android:layout_gravity="center_horizontal" />
 
         <TextView
-            android:id="@+id/TotalMembersText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_700" />
-
-        <TextView
-            android:id="@+id/MembersMissedText"
+            android:id="@+id/Missing_TotalMembersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -154,18 +146,10 @@
             android:textColor="@color/purple_700" />
 
         <TextView
-            android:id="@+id/TotalVisitorsText"
+            android:id="@+id/Missing_TotalVisitorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_700" />
-
-        <TextView
-            android:id="@+id/VisitorsMissedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/purple_700" />

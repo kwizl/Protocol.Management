@@ -28,6 +28,9 @@
             android:name="com.morh.management.views.MembersAttendanceActivity"
             android:exported="false" />
         <activity
+            android:name="com.morh.management.views.MissingActivity"
+            android:exported="false" />
+        <activity
             android:name="com.morh.management.views.AttendanceActivity"
             android:exported="false" />
         <activity

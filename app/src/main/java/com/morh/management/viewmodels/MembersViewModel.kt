@@ -171,4 +171,21 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
 
         return members
     }
+
+    // Returns Date
+    @SuppressLint("SimpleDateFormat")
+    fun GetRecentSundayDate(): String
+    {
+        val calendar: Calendar = Calendar.getInstance()
+        val day: Int = calendar.get(Calendar.DAY_OF_WEEK)
+
+        val sdf = SimpleDateFormat("MM/dd/yyyy")
+        var currentDate = sdf.format(java.util.Date())
+
+        calendar.add(Calendar.DATE, -day + 1)
+
+        currentDate = sdf.format(calendar.time)
+
+        return currentDate
+    }
 }

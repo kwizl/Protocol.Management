@@ -21,6 +21,7 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var _memberCardView: CardView
     private lateinit var _visitorCardView: CardView
     private lateinit var _totalMembersTextView: TextView
+    private lateinit var _membersAttendanceDate: TextView
     private lateinit var _membersAttendedTextView: TextView
     private lateinit var _totalVisitorsTextView: TextView
     private lateinit var _visitorsAttendedTextView: TextView
@@ -38,6 +39,7 @@ class AttendanceActivity : AppCompatActivity() {
         _memberCardView = findViewById<CardView>(R.id.Attendance_MemberAttendedCardView)
         _visitorCardView = findViewById<CardView>(R.id.Attendance_VisitorAttendedCardView)
         _totalMembersTextView = findViewById<TextView>(R.id.TotalMembersText)
+        _membersAttendanceDate = findViewById<TextView>(R.id.AttendanceDate)
         _membersAttendedTextView = findViewById<TextView>(R.id.MembersAttendedText)
         _totalVisitorsTextView = findViewById<TextView>(R.id.TotalVisitorsText)
         _visitorsAttendedTextView = findViewById<TextView>(R.id.VisitorsAttendedText)
@@ -60,6 +62,8 @@ class AttendanceActivity : AppCompatActivity() {
         else {
             _membersAttendedTextView.text = "0"
         }
+
+        _membersAttendanceDate.text = "Date: ${_membersViewModel.GetRecentSundayDate()}"
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
 

@@ -21,6 +21,7 @@ class MissingActivity : AppCompatActivity() {
     private lateinit var _memberCardView: CardView
     private lateinit var _visitorCardView: CardView
     private lateinit var _totalMembersTextView: TextView
+    private lateinit var _missingDateTextView: TextView
     private lateinit var _totalVisitorsTextView: TextView
     private lateinit var _missingMembersTextView: TextView
     private lateinit var _missingVisitorsTextView: TextView
@@ -37,6 +38,7 @@ class MissingActivity : AppCompatActivity() {
 
         _memberCardView = findViewById<CardView>(R.id.MemberCardView)
         _visitorCardView = findViewById<CardView>(R.id.VisitorCardView)
+        _missingDateTextView = findViewById<TextView>(R.id.MissingDate)
         _totalMembersTextView = findViewById<TextView>(R.id.Missing_TotalMembersText)
         _totalVisitorsTextView = findViewById<TextView>(R.id.Missing_TotalVisitorsText)
         _missingMembersTextView = findViewById<TextView>(R.id.MissingMembersText)
@@ -60,6 +62,8 @@ class MissingActivity : AppCompatActivity() {
         else {
             _missingMembersTextView.text = "0"
         }
+
+        _missingDateTextView.text = "Date: ${_membersViewModel.GetRecentSundayDate()}"
 
         _visitorsViewModel = ViewModelProvider(this)[VisitorsViewModel::class]
 

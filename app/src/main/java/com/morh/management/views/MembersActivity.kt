@@ -57,6 +57,7 @@ class MembersActivity : AppCompatActivity() {
         })
     }
 
+    // Function for filtering members by searching
     @SuppressLint("NotifyDataSetChanged")
     private fun filter(newText: String, members: List<Member>?)
     {
@@ -69,6 +70,11 @@ class MembersActivity : AppCompatActivity() {
                 {
                     filteredMembers.add(member)
                 }
+                else if (member.Contact?.lowercase()!!.contains(newText.lowercase()))
+                {
+                    filteredMembers.add(member)
+                }
+
             }
         }
 

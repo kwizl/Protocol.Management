@@ -55,6 +55,7 @@ class MembersMissingActivity : AppCompatActivity() {
         })
     }
 
+    // Function for filtering members by searching
     @SuppressLint("NotifyDataSetChanged")
     private fun filter(newText: String, members: List<Member>?) {
         val filteredMembers = ArrayList<Member>()
@@ -62,6 +63,10 @@ class MembersMissingActivity : AppCompatActivity() {
         if (members != null) {
             for (member in members) {
                 if (member.Name.lowercase().contains(newText.lowercase())) {
+                    filteredMembers.add(member)
+                }
+                else if (member.Contact?.lowercase()!!.contains(newText.lowercase()))
+                {
                     filteredMembers.add(member)
                 }
             }

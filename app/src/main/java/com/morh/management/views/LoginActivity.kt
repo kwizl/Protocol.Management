@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.morh.management.viewmodels.LoginViewModel
 import com.morh.protocolmanagement.databinding.ActivityLoginBinding
 
-
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var _loginViewModel: LoginViewModel

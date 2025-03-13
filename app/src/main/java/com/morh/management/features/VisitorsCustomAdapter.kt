@@ -37,6 +37,7 @@ class VisitorsCustomAdapter(private var visitorList : List<Visitor>?) : Recycler
             holder.textName.text = currentItem.Name
             holder.textContact.text = currentItem.Contact
 
+            // This is for copying to clipboard after long press
             holder.textContact.setOnLongClickListener(View.OnLongClickListener {
                 val clipboardManager = getSystemService(context, ClipboardManager::class.java) as ClipboardManager
                 val clipData = ClipData.newPlainText("Contact", holder.textContact.text)

@@ -57,17 +57,22 @@ class VisitorsAttendanceActivity : AppCompatActivity() {
         })
     }
 
+    // Function for filtering visitors by searching
     @SuppressLint("NotifyDataSetChanged")
     private fun filter(newText: String, visitors: List<Visitor>?)
     {
         val filteredVisitors = ArrayList<Visitor>()
 
         if (visitors != null) {
-            for (member in visitors)
+            for (visitor in visitors)
             {
-                if (member.Name.lowercase().contains(newText.lowercase()))
+                if (visitor.Name.lowercase().contains(newText.lowercase()))
                 {
-                    filteredVisitors.add(member)
+                    filteredVisitors.add(visitor)
+                }
+                else if (visitor.Contact.lowercase().contains(newText.lowercase()))
+                {
+                    filteredVisitors.add(visitor)
                 }
             }
         }

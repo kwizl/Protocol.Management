@@ -46,7 +46,7 @@ class AttendanceActivity : AppCompatActivity() {
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
 
-        val allMembers = _membersViewModel.GetAll()
+        val allMembers = _membersViewModel.GetCurrentAll()
         val membersAttendance = _membersViewModel.GetAttendance(null)
 
         if (allMembers != null) {

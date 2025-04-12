@@ -14,7 +14,7 @@ import com.morh.management.wrappers.PaginationRequest
 class MembersService {
 
     // Call the List endpoint of the API
-    public fun GetAll(token: String, request: PaginationRequest): List<Member>?
+    public fun GetAll(token: String, request: PaginationRequest, transferred: Boolean): List<Member>?
     {
         val value = "Bearer ${token}"
         val call = ApiClient.apiService.getAllMembers(value, request)
@@ -23,7 +23,7 @@ class MembersService {
         val response = call.execute();
         val res = response.body();
         if (res != null) {
-            members = res
+            members = res.filter { it.Transferred == transferred }
         }
 
         return members
@@ -38,7 +38,7 @@ class MembersService {
         val response = call.execute();
         val res = response.body();
         if (res != null) {
-            members = res
+            members = res.filter { it.Transferred == false }
         }
 
         return members
@@ -53,7 +53,7 @@ class MembersService {
         val response = call.execute();
         val res = response.body();
         if (res != null) {
-            members = res
+            members = res.filter { it.Transferred == false }
         }
 
         return members

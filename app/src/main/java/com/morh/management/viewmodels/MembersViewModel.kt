@@ -37,21 +37,43 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
     }
 
     // Get All Members
-    private suspend fun getAllMembers(): List<Member>?
+    private suspend fun getAllCurrentMembers(): List<Member>?
     {
         val request = PaginationRequest()
         val token = _tokenRepository.getToken().last()
 
-        val members =  _membersService.GetAll(token.TokenVal, request)
+        val members =  _membersService.GetAll(token.TokenVal, request, false)
+        return members
+    }
+
+    private suspend fun getAllTransferredMembers() : List<Member>?
+    {
+        val request = PaginationRequest()
+        val token = _tokenRepository.getToken().last()
+
+        val members =  _membersService.GetAll(token.TokenVal, request, true)
         return members
     }
 
     // Makes Async to Sync
-    fun GetAll(): List<Member>?
+    fun GetCurrentAll(): List<Member>?
     {
         var members: List<Member>? = null
         val job = CoroutineScope(Dispatchers.Default).launch {
-            members = getAllMembers()
+            members = getAllCurrentMembers()
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return members
+    }
+
+    fun GetTransferredAll(): List<Member>?
+    {
+        var members: List<Member>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            members = getAllTransferredMembers()
         }
         runBlocking {
             job.join()
@@ -144,7 +166,6 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
             else {
                 currentDate = datePicked
             }
-
         }
         else {
             calendar.add(Calendar.DATE, -day + 1)

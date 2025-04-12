@@ -16,6 +16,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var _visitorCardView: CardView
     private lateinit var _missingCardView: CardView
     private lateinit var _attendanceCardView: CardView
+    private lateinit var _transferredCardView: CardView
 
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("UnsafeIntentLaunch")
@@ -27,6 +28,7 @@ class DashboardActivity : AppCompatActivity() {
         _visitorCardView = findViewById<CardView>(R.id.VisitorCardView)
         _missingCardView = findViewById<CardView>(R.id.MissingCardView)
         _attendanceCardView = findViewById<CardView>(R.id.AttendanceCardView)
+        _transferredCardView = findViewById<CardView>(R.id.TransferredCardView)
 
         _memberCardView.setOnClickListener {
             startActivity(Intent(this, MembersActivity::class.java))
@@ -42,6 +44,10 @@ class DashboardActivity : AppCompatActivity() {
 
         _attendanceCardView.setOnClickListener {
             startActivity(Intent(this, AttendanceActivity::class.java))
+        }
+
+        _transferredCardView.setOnClickListener {
+            startActivity(Intent(this, TransferredMembersActivity::class.java))
         }
     }
 }

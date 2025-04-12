@@ -16,8 +16,9 @@ import com.morh.management.features.MembersCustomAdapter
 import com.morh.management.models.Member
 import com.morh.management.viewmodels.MembersViewModel
 import com.morh.protocolmanagement.R
+import com.morh.protocolmanagement.R.*
 
-class MembersActivity : AppCompatActivity() {
+class TransferredMembersActivity : AppCompatActivity() {
 
     private lateinit var _searchView: SearchView
     private lateinit var _recyclerView: RecyclerView
@@ -29,14 +30,14 @@ class MembersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.activity_members)
+        setContentView(layout.activity_transferred_members)
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
-        val members = _membersViewModel.GetCurrentAll()
+        val members = _membersViewModel.GetTransferredAll()
 
-        _searchView = findViewById<SearchView>(R.id.MemberSearchView)!!
+        _searchView = findViewById<SearchView>(id.TransferredMemberSearchView)!!
 
-        _recyclerView = findViewById<RecyclerView>(R.id.MemberRecyclerView)!!
+        _recyclerView = findViewById<RecyclerView>(id.TransferredMemberRecyclerView)!!
         _recyclerView.layoutManager = LinearLayoutManager(this)
         _recyclerView.setHasFixedSize(true)
 

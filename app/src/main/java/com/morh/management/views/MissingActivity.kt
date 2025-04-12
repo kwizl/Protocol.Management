@@ -46,7 +46,7 @@ class MissingActivity : AppCompatActivity() {
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
 
-        val allMembers = _membersViewModel.GetAll()
+        val allMembers = _membersViewModel.GetCurrentAll()
         val membersMissing = _membersViewModel.GetMissing(null)
 
         if (allMembers != null) {

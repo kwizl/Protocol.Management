@@ -4,7 +4,7 @@ import com.google.type.DateTime
 
 data class Member(
     val Code: String,
-    val Name: String,
+    var Name: String,
     val Contact: String?,
     val Gender: String?,
     val DepartmentCode: String?,

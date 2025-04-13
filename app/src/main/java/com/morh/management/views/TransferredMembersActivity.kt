@@ -67,51 +67,6 @@ class TransferredMembersActivity : AppCompatActivity() {
         if (members != null) {
             for (member in members)
             {
-                if (member.TitleCode == "Tit_WcPa4")
-                {
-                    member.Name = "Snr.Deputy Archbishop " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_yWE05")
-                {
-                    member.Name = "Bishop " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_19Bgz")
-                {
-                    member.Name = "Snr.Pastor " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_yWE05")
-                {
-                    member.Name = "Bishop " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_NwF3u")
-                {
-                    member.Name = "Snr.Overseer " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_gIGjP")
-                {
-                    member.Name = "Overseer Elder " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_Trolk")
-                {
-                    member.Name = "Overseer " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_9EAY7")
-                {
-                    member.Name = "Pst. " + member.Name
-                }
-
-                if (member.TitleCode == "Tit_anAu1")
-                {
-                    member.Name = "Elder " + member.Name
-                }
-
                 if (member.Name.lowercase().contains(newText.lowercase()))
                 {
                     filteredMembers.add(member)
@@ -120,7 +75,6 @@ class TransferredMembersActivity : AppCompatActivity() {
                 {
                     filteredMembers.add(member)
                 }
-
             }
         }
 

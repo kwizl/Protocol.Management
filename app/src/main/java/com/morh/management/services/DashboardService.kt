@@ -14,7 +14,7 @@ class DashboardService {
     @RequiresApi(Build.VERSION_CODES.R)
     fun countMembers() : Int
     {
-        val count = _membersViewModel.GetAll()
+        val count = _membersViewModel.GetCurrentAll()
         if (count != null) {
             return count.size
         }

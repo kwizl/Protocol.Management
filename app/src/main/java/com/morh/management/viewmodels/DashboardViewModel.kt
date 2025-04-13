@@ -30,7 +30,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
 
     // Returns number of Members
     suspend fun membersCount(): Int? {
-        val count = token?.let { _membersService.GetAll(it, _request) }
+        val count = token?.let { _membersService.GetAll(it, _request, false) }
 
         return count?.count()
     }

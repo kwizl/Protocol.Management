@@ -43,6 +43,9 @@
             android:name="com.morh.management.views.MembersActivity"
             android:exported="false" />
         <activity
+            android:name="com.morh.management.views.TransferredMembersActivity"
+            android:exported="false" />
+        <activity
             android:name="com.morh.management.views.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">

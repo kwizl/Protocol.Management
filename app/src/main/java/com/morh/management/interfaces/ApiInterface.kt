@@ -1,6 +1,7 @@
 package com.morh.management.interfaces
 
 import com.morh.management.models.Member
+import com.morh.management.models.Title
 import com.morh.management.models.UserDTO
 import com.morh.management.models.User
 import com.morh.management.models.Visitor
@@ -15,6 +16,9 @@ import retrofit2.http.Query
 interface ApiInterface {
     @POST("Login")
     fun getToken(@Body user: User): Call<UserDTO>
+
+    @GET("api/v1/Titles")
+    fun getAllTitles(@Header("Authorization") auth: String, @Query("Page") Page: Int, @Query("PageSize") PageSize: Int): Call<List<Title>?>
 
     @POST("api/v1/Members/List")
     fun getAllMembers(@Header("Authorization") auth: String, @Body request: PaginationRequest): Call<List<Member>?>

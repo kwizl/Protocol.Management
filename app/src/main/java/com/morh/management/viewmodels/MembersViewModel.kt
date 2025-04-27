@@ -5,12 +5,14 @@ import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
-import com.google.type.DateTime
 import com.morh.management.features.LocalDatabase
 import com.morh.management.models.Member
+import com.morh.management.models.Title
 import com.morh.management.repository.SundayDateRepository
+import com.morh.management.repository.TitleRepository
 import com.morh.management.repository.TokenRepository
 import com.morh.management.services.MembersService
+import com.morh.management.services.TitleService
 import com.morh.management.tables.SundayDate
 import com.morh.management.wrappers.PaginationRequest
 import kotlinx.coroutines.CoroutineScope
@@ -24,20 +26,34 @@ import java.util.Calendar
 class MembersViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _tokenRepository: TokenRepository
-    private val _membersService = MembersService()
+    private var _titleRepository: TitleRepository
     private var _sundayDateRepository: SundayDateRepository
+
+    private val _titleService = TitleService()
+    private val _membersService = MembersService()
 
     init {
         val tokenDao = LocalDatabase.getInstance(application).getTokenDao()
         val sundayDateDao = LocalDatabase.getInstance(application).getSundayDateDao()
+        val titleDao = LocalDatabase.getInstance(application).getTitleDao()
 
         _tokenRepository = TokenRepository(tokenDao)
+        _titleRepository = TitleRepository(titleDao)
         _sundayDateRepository = SundayDateRepository(sundayDateDao)
+    }
 
+    // Get All Titles
+    private fun getAllTitles(): List<Title>?
+    {
+        val request = PaginationRequest()
+        val token = _tokenRepository.getToken().last()
+
+        val titles = _titleService.GetTitles(token.TokenVal, request)
+        return titles
     }
 
     // Get All Members
-    private suspend fun getAllCurrentMembers(): List<Member>?
+    private fun getAllCurrentMembers(): List<Member>?
     {
         val request = PaginationRequest()
         val token = _tokenRepository.getToken().last()
@@ -46,13 +62,37 @@ class MembersViewModel(application: Application) : AndroidViewModel(application)
         return members
     }
 
-    private suspend fun getAllTransferredMembers() : List<Member>?
+    private fun getAllTransferredMembers() : List<Member>?
     {
         val request = PaginationRequest()
         val token = _tokenRepository.getToken().last()
 
         val members =  _membersService.GetAll(token.TokenVal, request, true)
         return members
+    }
+
+    fun GetAllTitles(): List<Title>?
+    {
+        var titles: List<Title>? = null
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            titles =  _titleRepository.getTitles()
+
+            if (titles!!.isEmpty() || titles!! !=  getAllTitles())
+            {
+                _titleRepository.truncate()
+
+                titles = getAllTitles()
+                for (title in titles!!)
+                {
+                    _titleRepository.insert(title)
+                }
+            }
+        }
+        runBlocking {
+            job.join()
+        }
+
+        return titles
     }
 
     // Makes Async to Sync

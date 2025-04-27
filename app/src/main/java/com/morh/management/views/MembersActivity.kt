@@ -33,42 +33,24 @@ class MembersActivity : AppCompatActivity() {
 
         _membersViewModel = ViewModelProvider(this)[MembersViewModel::class]
         val members = _membersViewModel.GetCurrentAll()
+        val titles = _membersViewModel.GetAllTitles()
+        val titleDict = mutableMapOf<String, String>()
+
+        if (titles != null) {
+            for (title in titles) {
+                titleDict[title.Code] = title.Name
+            }
+        }
 
         if (members != null) {
             for (member in members)
             {
-                if (member.TitleCode == "Tit_WcPa4")
+                // Mutates Member name if the member in a not a Priest or Elder
+                if (member.TitleCode == "TIT_7HA6" || member.TitleCode.isNullOrEmpty())
                 {
-                    member.Name = "Snr.Deputy Archbishop " + member.Name
+                    continue
                 }
-                else if (member.TitleCode == "Tit_yWE05")
-                {
-                    member.Name = "Bishop " + member.Name
-                }
-                else if (member.TitleCode == "Tit_19Bgz")
-                {
-                    member.Name = "Snr.Pastor " + member.Name
-                }
-                else if (member.TitleCode == "Tit_gIGjP")
-                {
-                    member.Name = "Overseer Elder " + member.Name
-                }
-                else if (member.TitleCode == "Tit_Trolk")
-                {
-                    member.Name = "Overseer " + member.Name
-                }
-                else if (member.TitleCode == "Tit_9EAY7")
-                {
-                    member.Name = "Pst. " + member.Name
-                }
-                else if (member.TitleCode == "Tit_NwF3u")
-                {
-                    member.Name = "Snr.Elder " + member.Name
-                }
-                else if (member.TitleCode == "Tit_anAu1")
-                {
-                    member.Name = "Elder " + member.Name
-                }
+                member.Name = "${titleDict[member.TitleCode]} ${member.Name}"
             }
         }
 

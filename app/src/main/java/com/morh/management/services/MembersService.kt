@@ -59,19 +59,4 @@ class MembersService {
 
         return members
     }
-
-    public fun GetTitleCodes(token: String, Page: Int, PageNumber: Int): List<Title>?
-    {
-        val value = "Bearer ${token}"
-        val call = ApiClient.apiService.getAllTitles(value, Page, PageNumber)
-        var titles: List<Title>? = null
-
-        val response = call.execute();
-        val res = response.body();
-        if (res != null) {
-            titles = res
-        }
-
-        return titles
-    }
 }

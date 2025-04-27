@@ -1,16 +1,14 @@
 package com.morh.management.models
 
-import com.google.type.DateTime
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "Titles")
 data class Title(
-    val Code: String,
-    var Name: String,
-    val DateCreated: String?,
-    val DateModified: String,
-    val AltarCode: String?,
-    val GroupCode: String?,
-    val TitleCode: String?,
-    val ClusterCode: String?,
-    val ResidenceCode: String?,
-    val FellowshipCode: String?
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "Code") val Code: String,
+    @ColumnInfo(name = "Name") val Name: String,
+    @ColumnInfo(name = "DateCreated") val DateCreated: String,
+    @ColumnInfo(name = "DateModified") val DateModified: String?
 )

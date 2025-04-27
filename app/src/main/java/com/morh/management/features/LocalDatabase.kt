@@ -16,7 +16,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.morh.management.interfaces.SundayDateDao
+import com.morh.management.interfaces.TitleDao
 import com.morh.management.interfaces.TokenDao
+import com.morh.management.models.Title
 import com.morh.management.tables.SundayDate
 import com.morh.management.tables.Token
 import kotlinx.coroutines.flow.Flow
@@ -24,10 +26,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-@Database(entities = [Token::class, SundayDate::class], version = 1)
+@Database(entities = [Token::class, SundayDate::class, Title::class], version = 3)
 abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun getTokenDao(): TokenDao
+    abstract fun getTitleDao(): TitleDao
     abstract fun getSundayDateDao(): SundayDateDao
 
     companion object {
@@ -40,6 +43,7 @@ abstract class LocalDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext, LocalDatabase::class.java, "local.db")
+                    .fallbackToDestructiveMigration()
                     .build()
 
                 INSTANCE = instance

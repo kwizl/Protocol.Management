@@ -17,7 +17,7 @@ class TitleRepository(private val titleDao: TitleDao) {
         return titleDao.deleteAll()
     }
 
-    fun getDate(): List<Title>
+    fun getTitles(): List<Title>
     {
         return titleDao.get();
     }
